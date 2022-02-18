@@ -1,0 +1,172 @@
+:root {
+  --grey: #3a3a3c;
+  --green: #538d4e;
+  --yellow: #b59f3b;
+}
+
+* {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  text-transform: uppercase;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+#content {
+  display: grid;
+  grid-template-columns: 100%;
+  align-items: center;
+  grid-gap: 1em;
+}
+
+#content>* {
+  border: 0.1em dashed black;
+  border-radius: 0.1em;
+  width: 50vw;
+}
+
+h2 {
+  text-align: center
+}
+
+#green-letters {
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  justify-items: center;
+}
+
+.green-input {
+  background: var(--green);
+  color: white
+}
+
+.yellow-input {
+  background: var(--yellow);
+  color: white;
+}
+
+#yellow-letters {
+  display: grid;
+  grid-template-columns: 100%;
+  justify-items: center;
+  align-items: center;
+  padding: 0;
+}
+
+#yellow-letters-buttons {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+#yellow-letters-buttons>* {
+  margin: 0.5em;
+}
+
+#words-results {
+  display: grid;
+  text-align: center;
+  padding: 0;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(min(5em, 100%), 1fr));
+}
+
+.grid-group {
+  display: grid;
+  width: 100%;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 16.66% 16.66% 16.66% 16.66% 16.66% 16.66%;
+}
+
+.checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  width: 5vw;
+  height: 5vw;
+  border: 0.1em solid black;
+}
+
+.button {
+  font-size: 2em;
+  text-align: center;
+  background: black;
+  color: white;
+}
+
+.button:hover, .checkbox:hover {
+  cursor: pointer
+}
+
+.button:active, .checkbox:active {
+  transform: scale(90%)
+}
+
+input {
+  padding: 0;
+  text-align: center;
+  font-size: 3vw;
+  border: none;
+  border-radius: 0;
+  margin: 0.1em;
+  width: 5vw;
+  height: 5vw;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.word-result {
+  padding: 0
+}
+
+.word-result>* {
+  padding: 0
+}
+
+.cross {
+  position: relative;
+  right: 2vw;
+  /* somehow this centered the cross */
+}
+
+.cross:after {
+  transform: rotate(315deg);
+  position: absolute;
+  content: '';
+  border-bottom: 0.2em solid black;
+  width: 4vw;
+}
+
+.grey-span {
+  color: var(--grey)
+}
+
+.yellow-span {
+  color: var(--yellow)
+}
+
+.green-span {
+  color: var(--green)
+}
+
+.cross:before {
+  transform: rotate(225deg);
+  position: absolute;
+  content: '';
+  border-bottom: 0.2em solid black;
+  width: 4vw;
+}
