@@ -20,6 +20,12 @@ function resetGuessStatus() {
       'remove': function(letter) {
         delete this.letters[letter]
       },
+    },
+    'grey': {
+      'letters': [],
+      'add': function(letter) {
+        this.letters.push(letter)
+      }
     }
   })
 }
@@ -48,6 +54,11 @@ function filterSearchList() {
             return false
           }
         })) continue
+    if (guessStatus.grey.letters.some(function(letter) {
+        console.log(word);
+        console.log(letter);
+        return word.includes(letter)
+      })) continue
     newList.push(word)
   }
   return newList
@@ -95,7 +106,7 @@ function guessHelper(e) {
       guessStatus.green.set(element.value, index)
     }
   })
-  Array.prototype.slice.call(document.getElementsByClassName('grid-group')).forEach(function(element) {
+  Array.prototype.slice.call(document.getElementById('yellow-letters').getElementsByClassName('grid-group')).forEach(function(element) {
     var children = element.childNodes
     let letter = children[0].value
     if (letter == '' || letter == undefined) return
@@ -105,6 +116,14 @@ function guessHelper(e) {
       if (children[i].classList.contains('active')) positions.push(i - 1)
     }
     guessStatus.yellow.letters[letter.toLowerCase()] = [...positions]
+  })
+  guessStatus.grey.letters = []
+  Array.prototype.slice.call(document.getElementById('grey-letters').getElementsByClassName('grid-group')).forEach(function(group) {
+    Array.prototype.slice.call(group.childNodes).filter(function(node) {
+      return node.tagName == 'INPUT'
+    }).forEach(function(node) {
+      if (node.value != '') guessStatus.grey.add(node.value.toLowerCase())
+    })
   })
   var searchList = filterSearchList()
   for (var i = 0; i < searchList.length; i++) {
@@ -123,6 +142,31 @@ function guessHelper(e) {
       element.appendChild(span)
     })
     grid.appendChild(element)
+  }
+}
+
+function greyLettersRow(e) {
+  let gridGroups = document.getElementById('grey-letters').querySelectorAll('div.grid-group')
+  let nodes = Array.prototype.slice.call(gridGroups[gridGroups.length - 1].childNodes).filter(function(node) {
+    return node.tagName == 'INPUT'
+  })
+  if (nodes.every(function(node) {
+      return node.value != ''
+    })) {
+    let group = document.createElement('div')
+    group.classList.add('grid-group')
+    for (var i = 0; i < 6; i++) {
+      var element = document.createElement('input')
+      element.type = 'text'
+      element.maxLength = 1
+      element.classList.add('grey-input')
+      group.appendChild(element)
+    }
+    document.getElementById('grey-letters').appendChild(group)
+  } else if (nodes.every(function(node) {
+      return node.value == ''
+    })) {
+    if (gridGroups.length > 1) document.getElementById('grey-letters').removeChild(gridGroups[gridGroups.length - 1])
   }
 }
 
@@ -169,6 +213,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
         window.location.reload()
       }
     },
+    {
+      'element': document.getElementById('grey-letters'),
+      'event': 'input',
+      'function': greyLettersRow
+    }
   ]
   addYellowLettersRow()
   guessHelper()

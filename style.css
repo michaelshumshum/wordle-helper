@@ -54,7 +54,12 @@ h2 {
   color: white;
 }
 
-#yellow-letters {
+.grey-input {
+  background: var(--grey);
+  color: white
+}
+
+#yellow-letters, #grey-letters {
   display: grid;
   grid-template-columns: 100%;
   justify-items: center;
