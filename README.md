@@ -1,4 +1,4 @@
-# simplejs-conways-game-of-life
+# wordle-helper
 
 ## what
 
